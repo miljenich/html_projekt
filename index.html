@@ -50,33 +50,33 @@
                 </article>
             </div>
         </section>
-        <section class="testimonials">
+        <section class="featured-listings">
             <div class="container">
                 <h2>Iskustva naših klijenata</h2>
-                <article class="testimonial">
+                <article class="listing">
                     <img src="fotke/klijent1.jpg" alt="Client Testimonial">
                     <p>"Nedavno sam koristio usluge upravljanja nekretninama ove tvrtke i ne mogu biti zadovoljniji. Njihov sveobuhvatan pristup osigurao je da moja nekretnina bude dobro održavana i da joj vrijednost stalno raste. Oni su se pobrinuli za sve, od rutinskog održavanja do pronalaženja pouzdanih najmoprimaca, što mi je omogućilo mir znajući da je moja investicija u dobrim rukama. Njihov profesionalizam i pažnja prema detaljima ih zaista izdvajaju. Toplo preporučujem svakome tko želi optimizirati potencijal svoje nekretnine!" - Ivan Danković</p>
                 </article>
-                <article class="testimonial">
+                <article class="listing">
                     <img src="fotke/klijent2.webp" alt="Client Testimonial">
                     <p>"Kada sam tražio novi dom, ova tvrtka je učinila proces nevjerojatno glatkim i bez stresa. Njihov širok izbor kuća i stanova za najam savršeno je odgovarao mojim potrebama i budžetu. Tim je bio izuzetno koristan, vodeći me kroz svaki korak i osiguravajući da pronađem idealno mjesto za život. Osim toga, njihove usluge prodaje nekretnina bile su vrhunske. Oni su se efikasno i stručno pobrinuli za prodaju moje prethodne nekretnine, osiguravajući odličnu cijenu i čineći cijeli proces transakcije besprijekornim. Sveukupno, izvanredno iskustvo s profesionalnim i posvećenim timom." - Mihael Vrbanjac</p>
                 </article>
             </div>
         </section>
-        <section class="services">
+        <section class="featured-listings">
             <div class="container">
                 <h2>Naše usluge</h2>
-                <article class="service">
+                <article class="listing">
                     <img src="fotke/upravljanje_nekretninama.png" alt="Upravljanje nekretninama">
                     <h3>Upravljanje nekretninama</h3>
                     <p>Nudimo sveobuhvatne usluge upravljanja nekretninama kako bismo osigurali optimalno održavanje i povećanje vrijednosti vaše imovine.</p>
                 </article>
-                <article class="service">
+                <article class="listing">
                     <img src="fotke/najam.jpg" alt="Najam kuća i stanova">
                     <h3>Najam kuća i stanova</h3>
                     <p>Pomažemo vam pronaći idealan dom iz naše široke ponude kuća i stanova za najam, prilagođenih vašim potrebama i budžetu.</p>
                 </article>
-                <article class="service">
+                <article class="listing">
                     <img src="fotke/prodaja.jpg" alt="Prodaja nekretnina">
                     <h3>Prodaja nekretnina</h3>
                     <p>Profesionalno i učinkovito posredujemo u prodaji nekretnina, osiguravajući vam najbolju moguću cijenu i bezbrižan proces transakcije.</p>
@@ -87,11 +87,12 @@
             <div class="container">
                 <h2>Prijavite se na naš newsletter</h2>
                 <p>Budite informirani o promocijama i nagradnim igrama.</p>
-                <form id="newsletterForm">
+             <form id="newsletterForm">
                     <label for="newsletterEmail">E-mail:</label>
                     <input type="email" id="newsletterEmail" name="newsletterEmail" required>
                     <button type="submit">Prijavi se</button>
                 </form>
+                <p id="statusMessage"></p>
             </div>
         </section>
     </main>
@@ -100,6 +101,22 @@
             <p>&copy; 2024 IznajmiME</p>
         </div>
     </footer>
-    <script src="scripts.js"></script>
+	 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("7E5nhLdwqBQfJBu6D");
+        })();
+
+        document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('service_58eu1fh', 'template_6sts2ew', this)
+                .then(function() {
+                    document.getElementById('statusMessage').innerText = 'Uspješno ste se prijavili na newsletter!';
+                }, function(error) {
+                    document.getElementById('statusMessage').innerText = 'Došlo je do pogreške prilikom prijave.';
+                });
+        });
+    </script>
 </body>
 </html>
