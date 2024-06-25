@@ -20,11 +20,10 @@
             </nav>
         </div>
     </header>
-    <main>
+  <main>
         <section class="contact">
             <div class="container">
                 <h2>Kontaktirajte nas</h2>
-                <p>Ako imate bilo kakva pitanja ili želite više informacija o našim ponudama, slobodno nas kontaktirajte putem obrasca u nastavku.</p>
                 <form id="contactForm">
                     <label for="name">Ime:</label>
                     <input type="text" id="name" name="name" required>
@@ -33,10 +32,11 @@
                     <input type="email" id="email" name="email" required>
                     
                     <label for="message">Poruka:</label>
-                    <textarea id="message" name="message" required></textarea>
+                    <textarea id="message" name="message" rows="5" required></textarea>
                     
                     <button type="submit">Pošalji</button>
                 </form>
+                <p id="statusMessage"></p>
             </div>
         </section>
     </main>
@@ -45,6 +45,22 @@
             <p>&copy; 2024 IznajmiME</p>
         </div>
     </footer>
-    <script src="scripts.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("7E5nhLdwqBQfJBu6D"); 
+        })();
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm('service_58eu1fh', 'template_bk2x6vp', this)
+                .then(function() {
+                    document.getElementById('statusMessage').innerText = 'Poruka je uspješno poslana!';
+                }, function(error) {
+                    document.getElementById('statusMessage').innerText = 'Došlo je do pogreške prilikom slanja poruke.';
+                });
+        });
+    </script>
 </body>
 </html>
